@@ -48,4 +48,11 @@ class Paddle
        x = 0;
      }
   }
+  
+  //update the paddle
+  void PaddlePosition(float x,float y)
+  {
+    this.x = x;
+    this.y = y;
+  }
 }
