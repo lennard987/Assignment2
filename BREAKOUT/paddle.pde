@@ -1,5 +1,6 @@
 class Paddle
 {
+  //declaring variables
   PImage paddle;
   float x;
   float y;

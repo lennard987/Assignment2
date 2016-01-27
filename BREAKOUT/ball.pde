@@ -1,5 +1,6 @@
 class Ball
 {
+  //declaring variables
   float x;
   float y;
   
@@ -26,5 +27,4 @@ class Ball
     fill(255);
     ellipse(x,y,radius*2,radius*2);
   }
-   
 }
