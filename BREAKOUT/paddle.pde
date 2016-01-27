@@ -55,4 +55,35 @@ class Paddle
     this.x = x;
     this.y = y;
   }
+  
+  //ball and paddle collision
+  boolean intersect(Ball ball)
+  {
+    //coordinate of the left side of the paddle
+    float paddleleft = x;
+    //coordinate of the right side of the paddle
+    float paddleright = x + Pwidth
+    
+    //if the ball Y position is equal with the paddle
+    if( (ball.y + ball.radius) >= y )
+    {
+      //if the ball is on the range of the paddle 
+      if( (ball.x >= paddleleft) && (ball.x <= paddleright) )
+      {
+        //meant it hit
+        return true;
+      }
+      else
+      {
+        //player missed
+        return false;
+      }
+    }
+    else
+    {
+      //its airborne 
+      return false;
+    }
+    
+  }
 }

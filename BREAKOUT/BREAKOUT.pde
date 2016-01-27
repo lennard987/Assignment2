@@ -19,4 +19,10 @@ void draw()
   paddle.display();
   ball.move();
   ball.display();
+  
+  //if the ball hits the paddle
+  if( paddle.intersect(ball))
+  {
+    ball.yspeed *= -1;
+  }
 }
