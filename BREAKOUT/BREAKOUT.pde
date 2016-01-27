@@ -15,6 +15,8 @@ void setup()
 void draw()
 {
   background(0);
-   paddle.PaddlePosition(mouseX, height - 30);
+  paddle.PaddlePosition(mouseX, height - 30);
   paddle.display();
+  ball.move();
+  ball.display();
 }
