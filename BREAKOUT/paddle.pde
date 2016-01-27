@@ -62,7 +62,7 @@ class Paddle
     //coordinate of the left side of the paddle
     float paddleleft = x;
     //coordinate of the right side of the paddle
-    float paddleright = x + Pwidth
+    float paddleright = x + Pwidth;
     
     //if the ball Y position is equal with the paddle
     if( (ball.y + ball.radius) >= y )

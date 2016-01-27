@@ -33,14 +33,25 @@ class Brick
       break;
 
       case 2:
-      image(bluebrick, x, y, Bwidth, Bheight);
+      image(redbrick, x, y, Bwidth, Bheight);
       break;
 
       case 3:
-      image(bluebrick, x, y, Bwidth, Bheight);
+      image(greenbrick, x, y, Bwidth, Bheight);
       break;
-
     }
   }
   
+  //position of 1 brick
+  void BrickPosition(float x,float y)
+  {
+    this.x = x;
+    this.y = y;
+  }
+  
+  //method to initialize brick lifes;
+  void BrickLife(int Blife)
+  {
+    bricklife = Blife;
+  }
 }
