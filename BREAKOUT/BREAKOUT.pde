@@ -4,11 +4,13 @@ Ball ball;
 Paddle paddle;
 Life playerlife;
 Score playerscore;
+static int gamestate;
 
 void setup()
 {
   size(800, 600);
   smooth();
+  noCursor();
   
   ball = new Ball();
   paddle = new Paddle();
@@ -16,6 +18,7 @@ void setup()
   playerscore = new Score(paddle);
   bricks = new ArrayList();
   initializebricks();
+  gamestate = 0;
 }
 
 void draw()
@@ -28,11 +31,13 @@ void draw()
   playerlife.draw();
   playerscore.draw();
   displaybricks();
+  gamestate();
   
   if( paddle.intersect(ball))
   {
     ball.yspeed = -abs(ball.yspeed);
-  }
+  }  
+  
 }
 
 void initializebricks()
@@ -111,7 +116,23 @@ void displaybricks()
         bricks.remove(b);
       }
     }
-
   }
 }
 
+void gamestate()
+{
+  if(keyPressed)
+  {
+    if( key == ' ')
+    {
+      gamestate = 1;
+      ball.reset();
+    }
+  }
+  
+  if(gamestate == 2)
+  {
+    text("Press spacebar if you're ready!",width/1.3,height/2);
+  }
+  
+}

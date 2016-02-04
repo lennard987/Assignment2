@@ -9,24 +9,28 @@ class Ball
   
   float radius;
   
+  color Bcolor;
+  
+  
   //initializing the ball
   Ball()
   {
     x = width/2;
     y = height/2;
-    
     xspeed = -5;
     yspeed = 5;
-    
     radius = 5;
+    Bcolor = color(255);
   }
   
   //display 
   void display()
   {
-    stroke(0);
-    fill(255);
-    ellipse(x,y,radius*2,radius*2);
+
+      stroke(0);
+      fill(Bcolor);
+      ellipse(x,y,radius*2,radius*2);
+
   }
   
   //ball movement
@@ -50,8 +54,23 @@ class Ball
     //check if the ball hits the ground, lose a life
     if( y > height - 30 )
     {
+      BREAKOUT.gamestate = 2;
       paddle.life--;
+      ball.xspeed = 0;
+      ball.yspeed = 0;
+      Bcolor = color(0);
+      
     }
+  }
+  
+  void reset()
+  {
+    paddle.PaddlePosition(width/2, height - 30);
+    ball.xspeed = -5;
+    ball.yspeed = 5;
+    Bcolor = color(255);
+    x = width/2;
+    y = height/2;
   }
   
 }
