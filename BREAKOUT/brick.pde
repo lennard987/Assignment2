@@ -9,7 +9,7 @@ class Brick
   int Bradius;
   
   int bricklife;
-  PImage redbrick,bluebrick,greenbrick;
+  color redbrick,bluebrick,greenbrick;
   
   Brick()
   {
@@ -17,9 +17,9 @@ class Brick
     Bwidth = 75;
     Bheight = 20;
     
-    redbrick = loadImage("redbrick.png");
-    bluebrick = loadImage("bluebrick.png");
-    greenbrick = loadImage("greenbrick.png");
+    redbrick = color(255,0,0);
+    bluebrick = color(0,0,255);
+    greenbrick = color(0,255,0);
   }
   
  
@@ -29,15 +29,21 @@ class Brick
     switch(bricklife)
     {
       case 1:
-        image(bluebrick, x, y, Bwidth, Bheight);
+        fill(redbrick);
+        stroke(255);
+        rect(x, y, Bwidth, Bheight);
       break;
 
       case 2:
-      image(redbrick, x, y, Bwidth, Bheight);
+      fill(bluebrick);
+      stroke(255);
+      rect(x, y, Bwidth, Bheight);
       break;
 
       case 3:
-      image(greenbrick, x, y, Bwidth, Bheight);
+      fill(greenbrick);
+      stroke(255);
+      rect(x, y, Bwidth, Bheight);
       break;
     }
   }

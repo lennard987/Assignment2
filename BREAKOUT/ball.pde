@@ -15,11 +15,9 @@ class Ball
   //initializing the ball
   Ball()
   {
-    x = width/2;
-    y = height/2;
-    xspeed = -5;
-    yspeed = 5;
-    radius = 5;
+    xspeed = 5;
+    yspeed = -5;
+    radius = 7.5;
     Bcolor = color(255);
   }
   
@@ -46,7 +44,7 @@ class Ball
     }
     
     //check the collision with the top wall
-    if( y < 0 )
+    if( y - radius < 45 )
     {
       yspeed *= -1;
     }
@@ -61,16 +59,6 @@ class Ball
       Bcolor = color(0);
       
     }
-  }
-  
-  void reset()
-  {
-    paddle.PaddlePosition(width/2, height - 30);
-    ball.xspeed = -5;
-    ball.yspeed = 5;
-    Bcolor = color(255);
-    x = width/2;
-    y = height/2;
   }
   
 }

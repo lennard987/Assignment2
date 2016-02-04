@@ -9,6 +9,8 @@ class Paddle
   int Pwidth;
   int Pheight;
   int Pradius;
+  int Pspeed;
+  color Pcolor;
 
   //stats
   int score;
@@ -22,8 +24,9 @@ class Paddle
 
     Pwidth = 75;
     Pheight = 15;
-    Pradius = 5;
-
+    Pradius = 10;
+    Pspeed = 7;
+    Pcolor = color(255);
     life = 3;
     score =0;
 
@@ -34,7 +37,8 @@ class Paddle
   {
     noStroke();
     wallcollision();
-    image(paddle, x, y, Pwidth, Pheight);
+    fill(Pcolor);
+    rect(x, y, Pwidth, Pheight,Pradius);
   }
 
   void wallcollision()
@@ -95,6 +99,42 @@ class Paddle
   {
     return score;
   }
+  
+  void moveleft()
+   {
+     x -= Pspeed;
+     
+     if(  x < 0 )
+     {
+       x = 0;
+     }
+   }
+   
+   void moveright()
+   {
+     x += Pspeed;
+     
+     if( x + Pwidth > width)
+     {
+       x = width - Pwidth;
+     }
+   }
+   
+   void control()
+   {
+     if(keyPressed)
+    {
+      if(keyCode == LEFT)
+      {
+        moveleft();
+      }
+      
+      if(keyCode == RIGHT)
+      {
+        moveright();
+      }
+    } 
+   }
 }
 
 

@@ -18,21 +18,24 @@ void setup()
   playerscore = new Score(paddle);
   bricks = new ArrayList();
   initializebricks();
-  gamestate = 0;
+  gamestate = 2;
 }
 
 void draw()
 {
   background(0);
-  paddle.PaddlePosition(mouseX, height - 30);
+  paddle.control();
   paddle.display();
+  paddle.control();
   ball.move();
   ball.display();
   playerlife.draw();
   playerscore.draw();
   displaybricks();
   gamestate();
-  
+  stroke(255);
+  line(0,height-30,width,height-30);
+  line(0,45,width,45);
   if( paddle.intersect(ball))
   {
     ball.yspeed = -abs(ball.yspeed);
@@ -121,18 +124,24 @@ void displaybricks()
 
 void gamestate()
 {
-  if(keyPressed)
-  {
-    if( key == ' ')
-    {
-      gamestate = 1;
-      ball.reset();
-    }
-  }
-  
   if(gamestate == 2)
   {
-    text("Press spacebar if you're ready!",width/1.3,height/2);
+    if(keyPressed)
+    {
+      if( key == ' ')
+      {
+        gamestate = 1;
+        ball.xspeed = 5;
+        ball.yspeed = -5;
+      }
+    }
+    
+    if(gamestate == 2)
+    {
+      text("Press spacebar if you're ready!",width/1.3,height/2);
+      ball.Bcolor = color(255);
+      ball.x = paddle.x + paddle.Pwidth/2;
+      ball.y = paddle.y;  
+    }
   }
-  
 }
