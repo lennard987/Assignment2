@@ -2,14 +2,18 @@
 ArrayList bricks;
 Ball ball;
 Paddle paddle;
+Life playerlife;
+Score playerscore;
 
 void setup()
 {
   size(800, 600);
   smooth();
-
+  
   ball = new Ball();
   paddle = new Paddle();
+  playerlife = new Life(paddle);
+  playerscore = new Score(paddle);
   bricks = new ArrayList();
   initializebricks();
 }
@@ -21,6 +25,8 @@ void draw()
   paddle.display();
   ball.move();
   ball.display();
+  playerlife.draw();
+  playerscore.draw();
   displaybricks();
   
   if( paddle.intersect(ball))

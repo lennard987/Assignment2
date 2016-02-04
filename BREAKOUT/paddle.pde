@@ -85,6 +85,16 @@ class Paddle
       return false;
     }
   }
+  
+  int getlife()
+  {
+    return life;
+  }
+  
+  int getscore()
+  {
+    return score;
+  }
 }
 
 
