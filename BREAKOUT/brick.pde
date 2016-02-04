@@ -54,4 +54,37 @@ class Brick
   {
     bricklife = Blife;
   }
+  
+  int GetBrickLife()
+  {
+    return bricklife;
+  }
+  
+  boolean intersect(Ball ball)
+  {
+    //width position of a brick
+    float Brickleft = x;
+    float Brickright = x + Bwidth;
+    
+    //checks if the ball is in the same y axis as the brick
+    if( (ball.y + ball.radius >= Bheight) && (ball.y + ball.radius) <= (y + Bheight))
+    {
+      //checks if the ball axis is on the brick
+      if( (ball.x >= Brickleft) && (ball.x <= Brickright) )
+      {
+        //meaning it hit
+        return true;
+      }
+      else
+      {
+        //it didnt hit the brick
+        return false;
+      }
+    }
+    else
+    {
+      //it hasnt hit anything
+      return false;
+    }
+  }
 }

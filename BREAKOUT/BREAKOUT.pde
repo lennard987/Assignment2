@@ -17,17 +17,15 @@ void setup()
 void draw()
 {
   background(0);
-  displaybricks();
   paddle.PaddlePosition(mouseX, height - 30);
   paddle.display();
   ball.move();
   ball.display();
+  displaybricks();
   
-
-  //if the ball hits the paddle change direction
-  if ( paddle.intersect(ball))
+  if( paddle.intersect(ball))
   {
-    ball.yspeed *= -1;
+    ball.yspeed = -abs(ball.yspeed);
   }
 }
 
@@ -92,6 +90,22 @@ void displaybricks()
     //display all the bricks
     Brick b = (Brick) bricks.get(i);
     b.display();
+    
+    //if the ball hits the brick
+    if (b.intersect(ball))
+    {
+      paddle.score+=20;
+      //change the ball direction and remove one life
+      ball.yspeed *= -1;
+      b.bricklife -= 1;
+      //if the bricks life hits 0 remove it from the array.
+      if (b.GetBrickLife() == 0)
+      {
+        //remove the brick hitted.
+        bricks.remove(b);
+      }
+    }
+
   }
 }
 
