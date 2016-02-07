@@ -50,9 +50,9 @@ class Ball
     }
     
     //check if the ball hits the ground, lose a life
-    if( y > height - 30 )
+    if( y > height - 30)
     {
-      BREAKOUT.gamestate = 2;
+      BREAKOUT.gamestate = 3;
       paddle.life--;
       ball.xspeed = 0;
       ball.yspeed = 0;

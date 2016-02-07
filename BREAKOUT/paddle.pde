@@ -1,7 +1,6 @@
 class Paddle
 {
   //declaring variables
-  PImage paddle;
   float x;
   float y;
 
@@ -29,8 +28,6 @@ class Paddle
     Pcolor = color(255);
     life = 3;
     score =0;
-
-    paddle = loadImage("paddle.png");
   }
 
   void display()
@@ -77,6 +74,8 @@ class Paddle
         //meant it hit
         return true;
       } 
+      
+  
       else
       {
         //player missed

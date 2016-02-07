@@ -4,22 +4,26 @@ class Brick
   float x;
   float y;
   
+  int level;
   int Bwidth;
   int Bheight;
   int Bradius;
   
+  
   int bricklife;
-  color redbrick,bluebrick,greenbrick;
+  color redbrick,bluebrick,greenbrick,graybrick;
   
   Brick()
   {
     bricklife = 3;
     Bwidth = 75;
     Bheight = 20;
+    Bradius = 5;
     
     redbrick = color(255,0,0);
     bluebrick = color(0,0,255);
     greenbrick = color(0,255,0);
+    graybrick = color(96,96,96);
   }
   
  
@@ -45,7 +49,18 @@ class Brick
       stroke(255);
       rect(x, y, Bwidth, Bheight);
       break;
+      
+      case 4:
+      fill(graybrick);
+      stroke(255);
+      rect(x, y, Bwidth, Bheight);
+      break;
+      
+      
     }
+    
+    fill(255);
+    text("level " + BREAKOUT.level,width/2+ 35,35);
   }
   
   //position of 1 brick
@@ -72,24 +87,17 @@ class Brick
     float Brickleft = x;
     float Brickright = x + Bwidth;
     
-    //checks if the ball is in the same y axis as the brick
-    if( (ball.y + ball.radius >= Bheight) && (ball.y + ball.radius) <= (y + Bheight))
+    if (((ball.y + ball.radius) >= Bheight) && ((ball.y + ball.radius) <= y + Bheight))
     {
-      //checks if the ball axis is on the brick
-      if( (ball.x >= Brickleft) && (ball.x <= Brickright) )
+      if ((ball.x >= Brickleft) && (ball.x <= Brickright))
       {
-        //meaning it hit
         return true;
-      }
-      else
+      } else
       {
-        //it didnt hit the brick
         return false;
       }
-    }
-    else
+    } else
     {
-      //it hasnt hit anything
       return false;
     }
   }
