@@ -162,10 +162,7 @@ void gamestate()
   //game over state
   if(gamestate == 4)
   {
-    fill(255);
-    textAlign(CENTER);
-    text("Game Over! ", width/2, height/3);
-    text("Score:" + paddle.score, width/2, height/2);
+    gameover();
   }
 }
 
@@ -243,6 +240,7 @@ void menu()
   }
 }
 
+//display method
 void displaygame()
 {
     paddle.control();
@@ -259,6 +257,36 @@ void displaygame()
     if ( paddle.intersect(ball))
     {
       ball.yspeed = -abs(ball.yspeed);
+    }
+}
+
+void gameover()
+{
+  fill(255);
+   textAlign(CENTER);
+   text("Game Over! ", width/2, height*0.2);
+   text("Score:" + paddle.score, width/2, height*0.3);
+   
+   
+   fill(255);
+    textAlign(CENTER);
+    text("Press spacebar to go back to menu", width/2, height*0.5);
+    
+   
+    if (keyPressed)
+    {
+      if ( key == ' ')
+      {
+        //restart the score;
+        level = 0;
+        ball = new Ball();
+        paddle = new Paddle();
+        playerlife = new Life(paddle);
+        playerscore = new Score(paddle);
+        bricks = new ArrayList();
+        initializebricks();
+        gamestate = 1;
+      }
     }
 }
 
