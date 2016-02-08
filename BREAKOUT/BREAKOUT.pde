@@ -257,6 +257,7 @@ void displaygame()
     if ( paddle.intersect(ball))
     {
       ball.yspeed = -abs(ball.yspeed);
+      ball.xspeed = -(paddle.x + paddle.Pwidth/2 - ball.x)/5;
     }
 }
 
