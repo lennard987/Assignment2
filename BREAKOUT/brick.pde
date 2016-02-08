@@ -11,7 +11,7 @@ class Brick
 
 
   int bricklife;
-  color redbrick, bluebrick, greenbrick, graybrick;
+  PImage life1,life2,life3,life4,life5;
 
   Brick()
   {
@@ -20,10 +20,12 @@ class Brick
     Bheight = 20;
     Bradius = 5;
 
-    redbrick = color(255, 0, 0);
-    bluebrick = color(0, 0, 255);
-    greenbrick = color(0, 255, 0);
-    graybrick = color(96, 96, 96);
+    life1 = loadImage("life1.png");
+    life2 = loadImage("life2.png");
+    life3 = loadImage("life3.png");
+    life4 = loadImage("life4.png");
+    life5 = loadImage("life5.png");
+    
   }
 
 
@@ -33,27 +35,22 @@ class Brick
     switch(bricklife)
     {
     case 1:
-      fill(redbrick);
-      stroke(255);
-      rect(x, y, Bwidth, Bheight);
+      image(life1,x, y, Bwidth, Bheight);
       break;
 
     case 2:
-      fill(bluebrick);
-      stroke(255);
-      rect(x, y, Bwidth, Bheight);
+      image(life2,x, y, Bwidth, Bheight);
       break;
 
     case 3:
-      fill(greenbrick);
-      stroke(255);
-      rect(x, y, Bwidth, Bheight);
+      image(life3,x, y, Bwidth, Bheight);
       break;
 
     case 4:
-      fill(graybrick);
-      stroke(255);
-      rect(x, y, Bwidth, Bheight);
+      image(life4,x, y, Bwidth, Bheight);
+      break;
+     case 5:
+      image(life5,x, y, Bwidth, Bheight);
       break;
     }
 

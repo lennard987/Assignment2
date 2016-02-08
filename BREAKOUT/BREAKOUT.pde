@@ -5,7 +5,7 @@ Paddle paddle;
 Life playerlife;
 Score playerscore;
 static int gamestate;
-static int level = 1;
+static int level;
 
 void setup()
 {
@@ -13,7 +13,7 @@ void setup()
   smooth();
   noCursor();
 
-  level = 0;
+  level = 1;
   ball = new Ball();
   paddle = new Paddle();
   playerlife = new Life(paddle);
@@ -37,7 +37,7 @@ void initializebricks()
   {
     Brick b = new Brick();
     b.BrickPosition( (75*i) + 25, 70);
-    b.BrickLife(1+level);
+    b.BrickLife(level);
     bricks.add(b);
   }
   //second row
@@ -45,7 +45,7 @@ void initializebricks()
   {
     Brick b = new Brick();
     b.BrickPosition( (75*i) + 25, 90);
-    b.BrickLife(2+level);
+    b.BrickLife(level);
     bricks.add(b);
   }
 
@@ -54,7 +54,7 @@ void initializebricks()
   {
     Brick b = new Brick();
     b.BrickPosition( (75*i) + 25, 110);
-    b.BrickLife(1+level);
+    b.BrickLife(level);
     bricks.add(b);
   }
 
@@ -63,7 +63,7 @@ void initializebricks()
   {
     Brick b = new Brick();
     b.BrickPosition( (75*i) + 25, 130);
-    b.BrickLife(2+level);
+    b.BrickLife(level);
     bricks.add(b);
   }
   //fifth row
@@ -71,7 +71,7 @@ void initializebricks()
   {
     Brick b = new Brick();
     b.BrickPosition( (75*i) + 25, 150);
-    b.BrickLife(1+level);
+    b.BrickLife(level);
     bricks.add(b);
   }
   //sixth row
@@ -79,7 +79,7 @@ void initializebricks()
   {
     Brick b = new Brick();
     b.BrickPosition( (75*i) + 25, 170);
-    b.BrickLife(2);
+    b.BrickLife(level);
     bricks.add(b);
   }
 }
