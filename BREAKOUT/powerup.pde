@@ -1,49 +1,69 @@
 class Powerup
 {
-  int largepaddlelife;
-  int largeballlife;
-  
+  boolean largepaddle;
+  boolean largeball;
+  boolean fasterpaddle;
+
   Powerup()
   {
-    largepaddlelife = 3;
-    largeballlife = 3;
+    largepaddle = false;
+    largeball = false;
+    fasterpaddle = false;
   }
-  
-  void largepaddle()
-  {
-    if (keyPressed)
-    {
-      if ( key == 'q' || key == 'Q')
-      {
-        if( largepaddlelife >= 1 )
-        {
-         paddle.Pwidth = 125;
-          largepaddlelife--; 
-        }
-      }
-    }
-  }
-  
-  void largeball()
-  {
-    if (keyPressed)
-    {
-      if ( key == 'w' || key == 'W')
-      {
-        if( largeballlife >= 1 )
-        {
-         ball.radius = 15;
-         largeballlife--; 
-         ball.colour
-        }
-      }
-    }
-  }
-  
+
   void display()
   {
-    largepaddle();
-    largeball();
+    //larger paddle
+    if (!largepaddle)
+    {
+      if (keyPressed)
+      {
+        if ( key == 'q' || key == 'Q')
+        {
+          largepaddle = true;
+          
+          if ( largepaddle  )
+          {
+            paddle.Pwidth = 125; 
+          }
+        }
+      }
+    }
+
+    //larger ball
+    if (!largeball)
+    {
+      if (keyPressed)
+      {
+        if ( key == 'w' || key == 'W')
+        {
+            largeball = true;
+          if ( largeball )
+          {
+            ball.radius = 15;
+            ball.Bcolor = color(255, 0, 0);
+          
+          }
+        }
+      }
+    }
+
+
+    //faster paddle
+
+    if (!fasterpaddle)
+    {
+      if ( keyPressed)
+      {
+        if ( key == 'E' || key == 'e')
+        {
+          paddle.Pspeed = 15;
+          paddle.Pwidth = 75;
+          fasterpaddle = true;
+        }
+      }
+    }
   }
 }
+
 
