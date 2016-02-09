@@ -53,7 +53,8 @@ class Brick
       image(life5,x, y, Bwidth, Bheight);
       break;
     }
-
+    
+    //text to display score
     fill(255);
     text("level " + BREAKOUT.level, width/2+ 35, 35);
   }

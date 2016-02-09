@@ -4,16 +4,18 @@ Ball ball;
 Paddle paddle;
 Life playerlife;
 Score playerscore;
+Menu gamemenu;
 static int gamestate;
-static int level;
+static int level = 1;
 
 void setup()
 {
-  size(800, 600);
+  size(750, 600);
   smooth();
   noCursor();
 
-  level = 1;
+  level = 0;
+  gamemenu = new Menu();
   ball = new Ball();
   paddle = new Paddle();
   playerlife = new Life(paddle);
@@ -36,16 +38,16 @@ void initializebricks()
   for ( int i = 0; i < 10; i++ )
   {
     Brick b = new Brick();
-    b.BrickPosition( (75*i) + 25, 70);
-    b.BrickLife(level);
+    b.BrickPosition( (75*i), 70);
+    b.BrickLife(1+level);
     bricks.add(b);
   }
   //second row
   for ( int i = 0; i < 10; i++ )
   {
     Brick b = new Brick();
-    b.BrickPosition( (75*i) + 25, 90);
-    b.BrickLife(level);
+    b.BrickPosition( (75*i), 90);
+    b.BrickLife(1+level);
     bricks.add(b);
   }
 
@@ -53,8 +55,8 @@ void initializebricks()
   for ( int i = 0; i < 10; i++ )
   {
     Brick b = new Brick();
-    b.BrickPosition( (75*i) + 25, 110);
-    b.BrickLife(level);
+    b.BrickPosition( (75*i), 110);
+    b.BrickLife(1+level);
     bricks.add(b);
   }
 
@@ -62,24 +64,24 @@ void initializebricks()
   for ( int i = 0; i < 10; i++ )
   {
     Brick b = new Brick();
-    b.BrickPosition( (75*i) + 25, 130);
-    b.BrickLife(level);
+    b.BrickPosition( (75*i), 130);
+    b.BrickLife(1+level);
     bricks.add(b);
   }
   //fifth row
   for ( int i = 0; i < 10; i++ )
   {
     Brick b = new Brick();
-    b.BrickPosition( (75*i) + 25, 150);
-    b.BrickLife(level);
+    b.BrickPosition( (75*i), 150);
+    b.BrickLife(1+level);
     bricks.add(b);
   }
   //sixth row
   for ( int i = 0; i < 10; i++ )
   {
     Brick b = new Brick();
-    b.BrickPosition( (75*i) + 25, 170);
-    b.BrickLife(level);
+    b.BrickPosition( (75*i), 170);
+    b.BrickLife(1+level);
     bricks.add(b);
   }
 }
@@ -115,7 +117,7 @@ void gamestate()
   //menu state
   if (gamestate == 1)
   {
-    menu();
+    gamemenu.display();
   }
   
   //ingame state
@@ -127,6 +129,7 @@ void gamestate()
   //lose life staet
   if( gamestate == 3)
   {
+    fill(255);
     line(0, height-30, width, height-30);
     line(0, 45, width, 45);
     paddle.control();
@@ -163,80 +166,6 @@ void gamestate()
   if(gamestate == 4)
   {
     gameover();
-  }
-}
-
-void menu()
-{
-  cursor();
-  noStroke();
-  textAlign(CENTER);
-  textSize(25);
-  float Rheight = height*0.15;
-  float Rwidth = width*0.5;
-  color Rcolor = color(255);
-  color Tcolor = color(0);
-  //play
-  fill(Rcolor);
-  rect(width*0.25, height*0.2, Rwidth, Rheight, 25);
-  fill(Tcolor);
-  text("PLAY", width*0.5, height*0.30);
-  //highscore
-  fill(Rcolor);
-  rect(width*0.25, height*0.4, Rwidth, Rheight, 25);
-  fill(Tcolor);
-  text("Highscore", width*0.5, height*0.50);
-  //exit
-  fill(Rcolor);
-  rect(width*0.25, height*0.6, Rwidth, Rheight, 25);
-  fill(Tcolor);
-  text("Instruction", width*0.5, height*0.70);
-
-  //first option
-  if (mouseX>=width*0.25 && mouseX <= width*0.75)
-  {
-    if (mouseY>=height*0.2 && mouseY<= height*0.2 + Rheight)
-    {
-      fill(255, 0, 0);
-      rect(width*0.25, height*0.2, width*0.5, height*0.15, 25);
-      cursor(HAND);
-      fill(0);
-      text("PLAY", width*0.5, height*0.30);
-      if (mousePressed)
-      {
-        gamestate = 2;
-        ball.Bcolor = color(255);
-        ball.x = paddle.x + paddle.Pwidth/2;
-        ball.y = paddle.y;  
-        noCursor();
-      }
-    }
-  }
-
-  //second option
-  if (mouseX>=width*0.25 && mouseX <= width*0.75)
-  {
-    if (mouseY>=height*0.4 && mouseY<= height*0.4 + Rheight)
-    {
-      fill(255, 0, 0);
-      rect(width*0.25, height*0.4, width*0.5, height*0.15, 25);
-      cursor(HAND);
-      fill(0);
-      text("Highscore", width*0.5, height*0.50);
-    }
-  }
-
-  //third option
-  if (mouseX>=width*0.25 && mouseX <= width*0.75)
-  {
-    if (mouseY>=height*0.6 && mouseY<= height*0.6 + Rheight)
-    {
-      fill(255, 0, 0);
-      rect(width*0.25, height*0.6, width*0.5, height*0.15, 25);
-      cursor(HAND);
-      fill(0);
-      text("Instruction", width*0.5, height*0.70);
-    }
   }
 }
 
