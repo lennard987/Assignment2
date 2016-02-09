@@ -1,19 +1,19 @@
 class Powerup
 {
   int largepaddlelife;
-  int largeball;
+  int largeballlife;
   
   Powerup()
   {
     largepaddlelife = 3;
-    largeball = 3;
+    largeballlife = 3;
   }
   
   void largepaddle()
   {
     if (keyPressed)
     {
-      if ( key == ' ')
+      if ( key == 'q' || key == 'Q')
       {
         if( largepaddlelife >= 1 )
         {
@@ -24,9 +24,26 @@ class Powerup
     }
   }
   
+  void largeball()
+  {
+    if (keyPressed)
+    {
+      if ( key == 'w' || key == 'W')
+      {
+        if( largeballlife >= 1 )
+        {
+         ball.radius = 15;
+         largeballlife--; 
+         ball.colour
+        }
+      }
+    }
+  }
+  
   void display()
   {
     largepaddle();
+    largeball();
   }
 }
 

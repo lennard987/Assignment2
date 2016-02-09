@@ -220,7 +220,7 @@ void youwin()
     if ( key == ' ')
     {
       //restart the score;
-      level = 0;
+      level = 1;
       ball = new Ball();
       paddle = new Paddle();
       playerlife = new Life(paddle);
