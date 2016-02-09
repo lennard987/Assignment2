@@ -102,14 +102,15 @@ class Brick
 
     //if hit right
 
-    if ( ball.x - ball.radius < Brickright && ball.x - ball.radius > Brickleft && ball.y > Bricktop && ball.y < Brickbottom)
+    if ( ball.x + ball.radius < Brickright && ball.x - ball.radius > Brickleft && ball.y > Bricktop && ball.y < Brickbottom)
     {
       ball.x = Brickright - ball.radius;
+      
       return true;
     }
 
     //hit  left
-    if ( ball.x + ball.radius > Brickleft && ball.x + ball.radius < Brickleft && ball.y > Bricktop && ball.y < Brickbottom)
+    if ( ball.x - ball.radius > Brickleft && ball.x + ball.radius < Brickleft && ball.y > Bricktop && ball.y < Brickbottom)
     {
       ball.x = Brickleft - ball.radius;
       ball.xspeed = -5.0f;

@@ -4,6 +4,7 @@ Ball ball;
 Paddle paddle;
 Life playerlife;
 Score playerscore;
+Powerup playerpowerup;
 Menu gamemenu;
 static int gamestate;
 static int level = 1;
@@ -16,6 +17,7 @@ void setup()
 
   level = 1;
   gamemenu = new Menu();
+  playerpowerup = new Powerup();
   ball = new Ball();
   paddle = new Paddle();
   playerlife = new Life(paddle);
@@ -166,6 +168,7 @@ void displaygame()
   playerlife.draw();
   playerscore.draw();
   displaybricks();
+  playerpowerup.display();
   stroke(255);
   line(0, height-30, width, height-30);
   line(0, 45, width, 45);
