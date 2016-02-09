@@ -113,40 +113,83 @@ class Powerup
           }
         }
       }
-    }
-
-    //larger ball
-    if (!largeball)
+    } else
     {
       if (keyPressed)
       {
-        if ( key == 'w' || key == 'W')
+        if ( key == 'q' || key == 'Q')
         {
-          largeball = true;
-          if ( largeball )
+          largepaddle = false;
+
+          if ( !largepaddle  )
           {
-            ball.radius = 15;
-            ball.Bcolor = color(255, 0, 0);
+            paddle.Pwidth = 75;
           }
         }
       }
     }
+  
 
-
-    //faster paddle
-
-    if (!fasterpaddle)
+  //larger ball
+  if (!largeball)
+  {
+    if (keyPressed)
     {
-      if ( keyPressed)
+      if ( key == 'w' || key == 'W')
       {
-        if ( key == 'E' || key == 'e')
+        largeball = true;
+        if ( largeball )
         {
-          paddle.Pspeed = 15;
-          paddle.Pwidth = 75;
-          fasterpaddle = true;
+          ball.radius = 15;
+        }
+      }
+    }
+  }
+  else
+  {
+    if (keyPressed)
+    {
+      if ( key == 'w' || key == 'W')
+      {
+        largeball = false;
+        if ( !largeball )
+        {
+          ball.radius = 7.5;
+        }
+      }
+    }
+  }
+
+
+  //faster paddle
+
+  if (!fasterpaddle)
+  {
+    if ( keyPressed)
+    {
+      if ( key == 'E' || key == 'e')
+      {
+        fasterpaddle = true;
+        if( fasterpaddle )
+        {
+        paddle.Pspeed = 15;
+        }
+      }
+    }
+  }
+  else
+  {
+     if ( keyPressed)
+    {
+      if ( key == 'E' || key == 'e')
+      {
+        fasterpaddle = false;
+        if( !fasterpaddle )
+        {
+          paddle.Pspeed = 8;
         }
       }
     }
   }
 }
-
+}
