@@ -13,6 +13,7 @@ class Paddle
 
   //stats
   int score;
+  int scoreadd;
   int life;
 
   Paddle()
@@ -21,6 +22,7 @@ class Paddle
     x = width / 2;
     y = height - 30;
 
+    scoreadd = 20;
     Pwidth = 75;
     Pheight = 15;
     Pradius = 10;

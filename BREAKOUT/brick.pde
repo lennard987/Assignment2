@@ -53,10 +53,7 @@ class Brick
       image(life5,x, y, Bwidth, Bheight);
       break;
     }
-    
-    //text to display score
-    fill(255);
-    text("level " + BREAKOUT.level, width/2+ 35, 35);
+  
   }
 
   //position of 1 brick
@@ -102,18 +99,20 @@ class Brick
 
     //if hit right
 
-    if ( ball.x + ball.radius < Brickright && ball.x - ball.radius > Brickleft && ball.y > Bricktop && ball.y < Brickbottom)
+    if ( ball.x - ball.radius < Brickright && ball.x - ball.radius > Brickleft && ball.y > Bricktop && ball.y < Brickbottom)
     {
       ball.x = Brickright - ball.radius;
-      
+      ball.xspeed = 5.0f;
+      ball.yspeed = 5.0f;
       return true;
     }
 
     //hit  left
-    if ( ball.x - ball.radius > Brickleft && ball.x + ball.radius < Brickleft && ball.y > Bricktop && ball.y < Brickbottom)
+    if ( ball.x + ball.radius > Brickleft && ball.x + ball.radius < Brickleft && ball.y > Bricktop && ball.y < Brickbottom)
     {
       ball.x = Brickleft - ball.radius;
       ball.xspeed = -5.0f;
+      ball.yspeed = 5.0f;
       return true;
     } else
     {

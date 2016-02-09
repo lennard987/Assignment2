@@ -5,6 +5,7 @@ Paddle paddle;
 Life playerlife;
 Score playerscore;
 Powerup playerpowerup;
+Level playerlevel;
 Menu gamemenu;
 static int gamestate;
 static int level = 1;
@@ -17,6 +18,7 @@ void setup()
 
   level = 1;
   gamemenu = new Menu();
+  playerlevel = new Level();
   playerpowerup = new Powerup();
   ball = new Ball();
   paddle = new Paddle();
@@ -130,7 +132,7 @@ void displaybricks()
     //if the ball hits the brick
     if (b.intersect(ball))
     {
-      paddle.score+=20;
+      paddle.score+=paddle.scoreadd;
       //change the ball direction and remove one life
       ball.yspeed *= -1;
       b.bricklife -= 1;
@@ -161,6 +163,7 @@ void displaybricks()
 //display game
 void displaygame()
 {
+  playerlevel.display();
   paddle.control();
   paddle.display();
   ball.move();
@@ -252,9 +255,14 @@ void nextlevel()
 
 void lostlife()
 {
-  fill(255);
+  playerlevel.display();
+  stroke(255);
   line(0, height-30, width, height-30);
   line(0, 45, width, 45);
+  
+  textAlign(CENTER);
+  text("Press spacebar to continue!", width/2, height/2);
+ 
   paddle.display();
   paddle.control();
   ball.display();
@@ -262,8 +270,7 @@ void lostlife()
   playerscore.draw();
   displaybricks();
   fill(255);
-  textAlign(CENTER);
-  text("Press spacebar to continue!", width/2, height/2);
+  
   ball.Bcolor = color(255);
   ball.x = paddle.x + paddle.Pwidth/2;
   ball.y = paddle.y - ball.radius;  
@@ -283,4 +290,3 @@ void lostlife()
     gamestate = 4;
   }
 }
-

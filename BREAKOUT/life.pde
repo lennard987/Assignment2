@@ -20,10 +20,13 @@ class Life
   {
     for (int i = 0; i < currentlife(); i++ )
     {
-      float x = hsize * i;
+      float x = 225 + hsize * i;
       float y = 5;
       
       image(heart,x,y,hsize,hsize);
     }
+    
+   stroke(255);
+  line(350,0,350,45);
   }
 }
