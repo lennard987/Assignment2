@@ -14,14 +14,14 @@ void setup()
   smooth();
   noCursor();
 
-  level = 0;
+  level = 1;
   gamemenu = new Menu();
   ball = new Ball();
   paddle = new Paddle();
   playerlife = new Life(paddle);
   playerscore = new Score(paddle);
   bricks = new ArrayList();
-  initializebricks();
+  initializebricks(level);
   gamestate = 1;
 }
 
@@ -31,7 +31,37 @@ void draw()
   gamestate();
 }
 
-void initializebricks()
+//gamestate
+void gamestate()
+{
+
+  //menu state
+  if (gamestate == 1)
+  {
+    gamemenu.display();
+  }
+
+  //ingame state
+  if (gamestate == 2)
+  {
+    displaygame();
+  }
+
+  //lose life staet
+  if ( gamestate == 3)
+  {
+    lostlife();
+  }
+
+  //game over state
+  if (gamestate == 4)
+  {
+    gameover();
+  }
+}
+
+//initialize bricks
+void initializebricks(int level)
 {
   //adding bricks in the array
   //first row 10 bricks
@@ -47,7 +77,7 @@ void initializebricks()
   {
     Brick b = new Brick();
     b.BrickPosition( (75*i), 90);
-    b.BrickLife(1+level);
+    b.BrickLife(0+level);
     bricks.add(b);
   }
 
@@ -73,7 +103,7 @@ void initializebricks()
   {
     Brick b = new Brick();
     b.BrickPosition( (75*i), 150);
-    b.BrickLife(1+level);
+    b.BrickLife(0+level);
     bricks.add(b);
   }
   //sixth row
@@ -81,11 +111,12 @@ void initializebricks()
   {
     Brick b = new Brick();
     b.BrickPosition( (75*i), 170);
-    b.BrickLife(1+level);
+    b.BrickLife(0+level);
     bricks.add(b);
   }
 }
 
+//display bricks
 void displaybricks()
 {
   for (int i = 0; i < bricks.size (); i++)
@@ -109,114 +140,144 @@ void displaybricks()
       }
     }
   }
-}
 
-void gamestate()
-{
-
-  //menu state
-  if (gamestate == 1)
+  //checks if the player wins or move to the next level
+  if ( bricks.size() == 0 )
   {
-    gamemenu.display();
-  }
-  
-  //ingame state
-  if (gamestate == 2)
-  {
-    displaygame();
-  }
-  
-  //lose life staet
-  if( gamestate == 3)
-  {
-    fill(255);
-    line(0, height-30, width, height-30);
-    line(0, 45, width, 45);
-    paddle.control();
-    paddle.display();
-    paddle.control();
-    ball.display();
-    playerlife.draw();
-    playerscore.draw();
-    displaybricks();
-    fill(255);
-    textAlign(CENTER);
-    text("Press spacebar to continue!", width/2, height/2);
-    ball.Bcolor = color(255);
-    ball.x = paddle.x + paddle.Pwidth/2;
-    ball.y = paddle.y;  
-
-    if (keyPressed)
+    if ( bricks.size() == 0 && level == 4 )
     {
-      if ( key == ' ')
-      {
-        gamestate = 2;
-        ball.xspeed = 5;
-        ball.yspeed = -5;
-      }
-    }
-    
-    if(paddle.life == 0)
+      youwin();
+    } else
     {
-      gamestate = 4;
+      nextlevel();
     }
-  }
-  
-  //game over state
-  if(gamestate == 4)
-  {
-    gameover();
   }
 }
 
-//display method
+
+
+//display game
 void displaygame()
 {
-    paddle.control();
-    paddle.display();
-    paddle.control();
-    ball.move();
-    ball.display();
-    playerlife.draw();
-    playerscore.draw();
-    displaybricks();
-    stroke(255);
-    line(0, height-30, width, height-30);
-    line(0, 45, width, 45);
-    if ( paddle.intersect(ball))
-    {
-      ball.yspeed = -abs(ball.yspeed);
-      ball.xspeed = -(paddle.x + paddle.Pwidth/2 - ball.x)/5;
-    }
+  paddle.control();
+  paddle.display();
+  ball.move();
+  ball.display();
+  playerlife.draw();
+  playerscore.draw();
+  displaybricks();
+  stroke(255);
+  line(0, height-30, width, height-30);
+  line(0, 45, width, 45);
 }
 
+//gameover state
 void gameover()
 {
   fill(255);
-   textAlign(CENTER);
-   text("Game Over! ", width/2, height*0.2);
-   text("Score:" + paddle.score, width/2, height*0.3);
-   
-   
-   fill(255);
-    textAlign(CENTER);
-    text("Press spacebar to go back to menu", width/2, height*0.5);
-    
-   
-    if (keyPressed)
+  textAlign(CENTER);
+  text("Game Over! ", width/2, height*0.2);
+  text("Score:" + paddle.score, width/2, height*0.3);
+
+
+  fill(255);
+  textAlign(CENTER);
+  text("Press spacebar to go back to menu", width/2, height*0.5);
+
+
+  if (keyPressed)
+  {
+    if ( key == ' ')
     {
-      if ( key == ' ')
-      {
-        //restart the score;
-        level = 0;
-        ball = new Ball();
-        paddle = new Paddle();
-        playerlife = new Life(paddle);
-        playerscore = new Score(paddle);
-        bricks = new ArrayList();
-        initializebricks();
-        gamestate = 1;
-      }
+      //restart the score;
+      level = 1;
+      ball = new Ball();
+      paddle = new Paddle();
+      playerlife = new Life(paddle);
+      playerscore = new Score(paddle);
+      bricks = new ArrayList();
+      initializebricks(level);
+      gamestate = 1;
     }
+  }
+}
+
+//win state
+void youwin()
+{
+
+  fill(255);
+  textAlign(CENTER);
+  text("You Win!", width/2, height*0.2);
+  text("Score:" + paddle.score, width/2, height*0.3);
+
+  text("Press spacebar to go back to menu", width/2, height*0.5);
+  if (keyPressed)
+  {
+    if ( key == ' ')
+    {
+      //restart the score;
+      level = 0;
+      ball = new Ball();
+      paddle = new Paddle();
+      playerlife = new Life(paddle);
+      playerscore = new Score(paddle);
+      bricks = new ArrayList();
+      initializebricks(level);
+      gamestate = 1;
+    }
+  }
+}
+
+//next level
+void nextlevel()
+{
+  textAlign(CENTER);
+  text("Press spacebar to go to the next level", width/2, height*0.5);
+  if (keyPressed)
+  {
+    if ( key == ' ')
+    {
+      //restart the score
+      playerscore = new Score(paddle);
+      bricks = new ArrayList();
+      initializebricks(level);
+      gamestate = 2;
+    }
+  }
+}
+
+void lostlife()
+{
+  fill(255);
+  line(0, height-30, width, height-30);
+  line(0, 45, width, 45);
+  paddle.display();
+  paddle.control();
+  ball.display();
+  playerlife.draw();
+  playerscore.draw();
+  displaybricks();
+  fill(255);
+  textAlign(CENTER);
+  text("Press spacebar to continue!", width/2, height/2);
+  ball.Bcolor = color(255);
+  ball.x = paddle.x + paddle.Pwidth/2;
+  ball.y = paddle.y - ball.radius;  
+
+  if (keyPressed)
+  {
+    if ( key == ' ')
+    {
+      gamestate = 2;
+      ball.xspeed = 5;
+      ball.yspeed = -5;
+    }
+  }
+
+  if (paddle.life == 0)
+  {
+    gamestate = 4;
+  }
 }
 

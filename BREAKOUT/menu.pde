@@ -44,6 +44,7 @@ class Menu
           ball.y = paddle.y;  
           noCursor();
         }
+        
       }
     }
 
