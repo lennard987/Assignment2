@@ -7,6 +7,7 @@ Score playerscore;
 Powerup playerpowerup;
 Level playerlevel;
 Menu gamemenu;
+Instruction instruction;
 static int gamestate;
 static int level = 1;
 
@@ -15,7 +16,8 @@ void setup()
   size(750, 600);
   smooth();
   noCursor();
-   
+  
+  instruction = new Instruction();
   gamemenu = new Menu();
   playerlevel = new Level();
   playerpowerup = new Powerup();
@@ -25,7 +27,7 @@ void setup()
   playerscore = new Score(paddle);
   bricks = new ArrayList();
   initializebricks(level);
-  gamestate = 1;
+  gamestate = 0;
 }
 
 void draw()
@@ -39,9 +41,13 @@ void gamestate()
 {
 
   //menu state
-  if (gamestate == 1)
+  if( gamestate == 0)
   {
     gamemenu.display();
+  }
+  if (gamestate == 1)
+  {
+    instruction.display();
   }
 
   //ingame state
@@ -192,7 +198,7 @@ void gameover()
       playerlevel = new Level();
       bricks = new ArrayList();
       initializebricks(playerlevel.level);
-      gamestate = 1;
+      gamestate = 0;
     }
   }
 }
@@ -285,4 +291,7 @@ void lostlife()
     gamestate = 4;
   }
 }
+
+
+
 
