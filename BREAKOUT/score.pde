@@ -7,7 +7,7 @@ class Score{
   Score(Paddle paddle)
   {
     this.paddle = paddle;
-    textX = width - 50;
+    textX = width - 25;
     textY = 35;
   }
   
@@ -22,5 +22,6 @@ class Score{
     textAlign(RIGHT);
     fill(255);
     text(currentscore(),textX,textY);
+    text("Score:",textX - 75,textY);
   }
 }

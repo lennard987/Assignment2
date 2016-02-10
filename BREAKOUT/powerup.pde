@@ -125,77 +125,76 @@ class Powerup
           if ( !largepaddle  )
           {
             paddle.Pwidth = 75;
-             paddle.scoreadd += 5;
+            paddle.scoreadd += 5;
           }
         }
       }
     }
-  
 
-  //larger ball
-  if (!largeball)
-  {
-    if (keyPressed)
+
+    //larger ball
+    if (!largeball)
     {
-      if ( key == 'w' || key == 'W')
+      if (keyPressed)
       {
-        largeball = true;
-        if ( largeball )
+        if ( key == 'w' || key == 'W')
         {
-          ball.radius = 15;
-           paddle.scoreadd -= 5;
+          largeball = true;
+          if ( largeball )
+          {
+            ball.radius = 15;
+            paddle.scoreadd -= 5;
+          }
+        }
+      }
+    } else
+    {
+      if (keyPressed)
+      {
+        if ( key == 'w' || key == 'W')
+        {
+          largeball = false;
+          if ( !largeball )
+          {
+            ball.radius = 7.5;
+            paddle.scoreadd += 5;
+          }
         }
       }
     }
-  }
-  else
-  {
-    if (keyPressed)
+
+
+    //faster paddle
+
+    if (!fasterpaddle)
     {
-      if ( key == 'w' || key == 'W')
+      if ( keyPressed)
       {
-        largeball = false;
-        if ( !largeball )
+        if ( key == 'E' || key == 'e')
         {
-          ball.radius = 7.5;
-           paddle.scoreadd += 5;
+          fasterpaddle = true;
+          if ( fasterpaddle )
+          {
+            paddle.Pspeed = 15;
+            paddle.scoreadd -= 5;
+          }
         }
       }
-    }
-  }
-
-
-  //faster paddle
-
-  if (!fasterpaddle)
-  {
-    if ( keyPressed)
+    } else
     {
-      if ( key == 'E' || key == 'e')
+      if ( keyPressed)
       {
-        fasterpaddle = true;
-        if( fasterpaddle )
+        if ( key == 'E' || key == 'e')
         {
-        paddle.Pspeed = 15;
-         paddle.scoreadd -= 5;
-        }
-      }
-    }
-  }
-  else
-  {
-     if ( keyPressed)
-    {
-      if ( key == 'E' || key == 'e')
-      {
-        fasterpaddle = false;
-        if( !fasterpaddle )
-        {
-          paddle.Pspeed = 8;
-           paddle.scoreadd += 5;
+          fasterpaddle = false;
+          if ( !fasterpaddle )
+          {
+            paddle.Pspeed = 8;
+            paddle.scoreadd += 5;
+          }
         }
       }
     }
   }
 }
-}
+
