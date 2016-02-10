@@ -1,4 +1,4 @@
-//c14337331 - Lennard Bandol 
+//c14337331 - Lennard Bandol
 ArrayList bricks;
 Ball ball;
 Paddle paddle;
@@ -15,8 +15,7 @@ void setup()
   size(750, 600);
   smooth();
   noCursor();
-
-  level = 1;
+   
   gamemenu = new Menu();
   playerlevel = new Level();
   playerpowerup = new Powerup();
@@ -68,56 +67,48 @@ void gamestate()
 void initializebricks(int level)
 {
   //adding bricks in the array
-  //first row 10 bricks
-  for ( int i = 0; i < 10; i++ )
-  {
-    Brick b = new Brick();
-    b.BrickPosition( (75*i), 70);
-    b.BrickLife(1+level);
-    bricks.add(b);
-  }
-  //second row
-  for ( int i = 0; i < 10; i++ )
-  {
-    Brick b = new Brick();
-    b.BrickPosition( (75*i), 90);
-    b.BrickLife(0+level);
-    bricks.add(b);
-  }
-
-  //third row
-  for ( int i = 0; i < 10; i++ )
-  {
-    Brick b = new Brick();
-    b.BrickPosition( (75*i), 110);
-    b.BrickLife(1+level);
-    bricks.add(b);
-  }
-
-  //fourth row
-  for ( int i = 0; i < 10; i++ )
-  {
-    Brick b = new Brick();
-    b.BrickPosition( (75*i), 130);
-    b.BrickLife(1+level);
-    bricks.add(b);
-  }
-  //fifth row
-  for ( int i = 0; i < 10; i++ )
-  {
-    Brick b = new Brick();
-    b.BrickPosition( (75*i), 150);
-    b.BrickLife(0+level);
-    bricks.add(b);
-  }
-  //sixth row
-  for ( int i = 0; i < 10; i++ )
-  {
-    Brick b = new Brick();
-    b.BrickPosition( (75*i), 170);
-    b.BrickLife(0+level);
-    bricks.add(b);
-  }
+   //first row 10 bricks
+   for ( int i = 0; i < 10; i++ )
+   {
+   Brick b = new Brick();
+   b.BrickPosition( (75*i), 70);
+   b.BrickLife(1+playerlevel.level);
+   bricks.add(b);
+   }
+   //second row
+   for ( int i = 0; i < 10; i++ )
+   {
+   Brick b = new Brick();
+   b.BrickPosition( (75*i), 90);
+   b.BrickLife(0+playerlevel.level);
+   bricks.add(b);
+   }
+   
+   //third row
+   for ( int i = 0; i < 10; i++ )
+   {
+   Brick b = new Brick();
+   b.BrickPosition( (75*i), 110);
+   b.BrickLife(1+playerlevel.level);
+   bricks.add(b);
+   }
+   
+   //fourth row
+   for ( int i = 0; i < 10; i++ )
+   {
+   Brick b = new Brick();
+   b.BrickPosition( (75*i), 130);
+   b.BrickLife(0+playerlevel.level);
+   bricks.add(b);
+   }
+   //fifth row
+   for ( int i = 0; i < 10; i++ )
+   {
+   Brick b = new Brick();
+   b.BrickPosition( (75*i), 150);
+   b.BrickLife(1+playerlevel.level);
+   bricks.add(b);
+   }
 }
 
 //display bricks
@@ -132,29 +123,25 @@ void displaybricks()
     //if the ball hits the brick
     if (b.intersect(ball))
     {
-      paddle.score+=paddle.scoreadd;
       //change the ball direction and remove one life
       ball.yspeed *= -1;
       b.bricklife -= 1;
       //if the bricks life hits 0 remove it from the array.
       if (b.GetBrickLife() == 0)
       {
+        paddle.score+=paddle.scoreadd;
         //remove the brick hitted.
         bricks.remove(b);
       }
     }
-  }
-
-  //checks if the player wins or move to the next level
+    
+    //checks if the player wins or move to the next level
   if ( bricks.size() == 0 )
-  {
-    if ( bricks.size() == 0 && level == 4 )
-    {
-      youwin();
-    } else
+  { 
     {
       nextlevel();
     }
+  }
   }
 }
 
@@ -201,8 +188,10 @@ void gameover()
       paddle = new Paddle();
       playerlife = new Life(paddle);
       playerscore = new Score(paddle);
+      playerpowerup = new Powerup();
+      playerlevel = new Level();
       bricks = new ArrayList();
-      initializebricks(level);
+      initializebricks(playerlevel.level);
       gamestate = 1;
     }
   }
@@ -229,7 +218,7 @@ void youwin()
       playerlife = new Life(paddle);
       playerscore = new Score(paddle);
       bricks = new ArrayList();
-      initializebricks(level);
+      initializebricks(playerlevel.level++);
       gamestate = 1;
     }
   }
@@ -238,20 +227,25 @@ void youwin()
 //next level
 void nextlevel()
 {
-  textAlign(CENTER);
-  text("Press spacebar to go to the next level", width/2, height*0.5);
-  if (keyPressed)
+  if( playerlevel.level == 5 )
   {
-    if ( key == ' ')
-    {
-      //restart the score
-      playerscore = new Score(paddle);
+    youwin();
+  }
+  else
+  {
       bricks = new ArrayList();
-      initializebricks(level);
+      initializebricks(playerlevel.level++);
       gamestate = 2;
-    }
+
+      ball.Bcolor = color(255);
+      ball.x = paddle.x + paddle.Pwidth/2;
+      ball.y = paddle.y - ball.radius;  
+      gamestate = 2;
+      ball.xspeed = 5;
+      ball.yspeed = -5;
   }
 }
+
 
 void lostlife()
 {
@@ -259,10 +253,11 @@ void lostlife()
   stroke(255);
   line(0, height-30, width, height-30);
   line(0, 45, width, 45);
-  
+
   textAlign(CENTER);
   text("Press spacebar to continue!", width/2, height/2);
- 
+
+  playerpowerup.display();
   paddle.display();
   paddle.control();
   ball.display();
@@ -270,7 +265,7 @@ void lostlife()
   playerscore.draw();
   displaybricks();
   fill(255);
-  
+
   ball.Bcolor = color(255);
   ball.x = paddle.x + paddle.Pwidth/2;
   ball.y = paddle.y - ball.radius;  
@@ -290,3 +285,4 @@ void lostlife()
     gamestate = 4;
   }
 }
+

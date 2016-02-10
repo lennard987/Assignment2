@@ -19,12 +19,8 @@ class Menu
     fill(Rcolor);
     rect(width*0.25, height*0.4, Rwidth, Rheight, 25);
     fill(Tcolor);
-    text("Highscore", width*0.5, height*0.50);
-    //exit
-    fill(Rcolor);
-    rect(width*0.25, height*0.6, Rwidth, Rheight, 25);
-    fill(Tcolor);
-    text("Instruction", width*0.5, height*0.70);
+    text("Instruction", width*0.5, height*0.50);
+ 
 
     //first option
     if (mouseX>=width*0.25 && mouseX <= width*0.75)
@@ -57,20 +53,7 @@ class Menu
         rect(width*0.25, height*0.4, width*0.5, height*0.15, 25);
         cursor(HAND);
         fill(0);
-        text("Highscore", width*0.5, height*0.50);
-      }
-    }
-
-    //third option
-    if (mouseX>=width*0.25 && mouseX <= width*0.75)
-    {
-      if (mouseY>=height*0.6 && mouseY<= height*0.6 + Rheight)
-      {
-        fill(255, 0, 0);
-        rect(width*0.25, height*0.6, width*0.5, height*0.15, 25);
-        cursor(HAND);
-        fill(0);
-        text("Instruction", width*0.5, height*0.70);
+        text("Instruction", width*0.5, height*0.50);
       }
     }
   }
