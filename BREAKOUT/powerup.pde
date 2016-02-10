@@ -110,6 +110,7 @@ class Powerup
           if ( largepaddle  )
           {
             paddle.Pwidth = 125;
+            paddle.scoreadd -= 5;
           }
         }
       }
@@ -124,6 +125,7 @@ class Powerup
           if ( !largepaddle  )
           {
             paddle.Pwidth = 75;
+             paddle.scoreadd += 5;
           }
         }
       }
@@ -141,6 +143,7 @@ class Powerup
         if ( largeball )
         {
           ball.radius = 15;
+           paddle.scoreadd -= 5;
         }
       }
     }
@@ -155,6 +158,7 @@ class Powerup
         if ( !largeball )
         {
           ball.radius = 7.5;
+           paddle.scoreadd += 5;
         }
       }
     }
@@ -173,6 +177,7 @@ class Powerup
         if( fasterpaddle )
         {
         paddle.Pspeed = 15;
+         paddle.scoreadd -= 5;
         }
       }
     }
@@ -187,6 +192,7 @@ class Powerup
         if( !fasterpaddle )
         {
           paddle.Pspeed = 8;
+           paddle.scoreadd += 5;
         }
       }
     }
